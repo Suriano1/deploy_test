@@ -1,0 +1,36 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgres"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  password  String
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+}
+
+model MqttBoard {
+  id         String   @id @default(cuid())
+  mac        String   @unique
+  iin        Float[]
+  i1         Float[]
+  i2         Float[]
+  vin        Float[]
+  timerdata  String[]
+  timercount Int
+  createdAt  DateTime @default(now())
+  vout       Float[]
+  st_red     Boolean
+  st_yellow  Boolean
+  st_green   Boolean
+}
